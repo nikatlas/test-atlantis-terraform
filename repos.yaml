@@ -1,13 +1,29 @@
-# repos.yaml
+version: 3
+automerge: true
+delete_source_branch_on_merge: true
+parallel_plan: true
+parallel_apply: true
+projects:
+- name: test-project
+  dir: .
+  workspace: default
+  terraform_version: v0.11.0
+  delete_source_branch_on_merge: true
+  autoplan:
+    when_modified: ["*.tf", "../modules/**/*.tf"]
+    enabled: true
+  apply_requirements: [mergeable, approved]
+  workflow: myworkflow
 workflows:
   myworkflow:
     plan:
       steps:
+      - run: echo "We are finally HEREEEE!!!!!!!!!!!!----------- LERRROYYY JENKINS"
       - init
-      - plan
-      - run: infracost breakdown --path=$PLANFILE --format=json --out-file=/tmp/$BASE_REPO_OWNER-$BASE_REPO_NAME-$PULL_NUM-$WORKSPACE-$REPO_REL_DIR-infracost.json
-repos:
-  - id: /.*/
-    workflow: myworkflow
-    post_workflow_hooks:
-      - run: infracost output --path=/tmp/$BASE_REPO_OWNER-$BASE_REPO_NAME-$PULL_NUM-*-infracost.json --format=github-comment --out-file=/tmp/infracost-comment.md
+      - plan:
+          extra_args: ["-lock", "false"]
+      - run: echo "We are finally THERE!!!!!!!!!!!!----------- LERRROYYY JENKINS"
+    apply:
+      steps:
+      - run: echo hi
+      - apply
