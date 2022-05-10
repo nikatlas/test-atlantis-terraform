@@ -1,0 +1,13 @@
+# repos.yaml
+workflows:
+  myworkflow:
+    plan:
+      steps:
+      - init
+      - plan
+      - run: infracost breakdown --path=$PLANFILE --format=json --out-file=/tmp/$BASE_REPO_OWNER-$BASE_REPO_NAME-$PULL_NUM-$WORKSPACE-$REPO_REL_DIR-infracost.json
+repos:
+  - id: /.*/
+    workflow: myworkflow
+    post_workflow_hooks:
+      - run: infracost output --path=/tmp/$BASE_REPO_OWNER-$BASE_REPO_NAME-$PULL_NUM-*-infracost.json --format=github-comment --out-file=/tmp/infracost-comment.md
