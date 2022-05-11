@@ -1,4 +1,11 @@
 version: 3
+workflows:
+  myworkflow:
+    plan:
+      steps:
+      - init
+      - run: echo "here someone ran me"
+
 projects:
 - name: testing-atlantis-now-nik
   dir: .
