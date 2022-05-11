@@ -6,8 +6,9 @@ workflows:
       - init
       - plan
       - run: infracost breakdown --path=$PLANFILE --format=json --out-file=/tmp/$BASE_REPO_OWNER-$BASE_REPO_NAME-$PULL_NUM-$WORKSPACE-$REPO_REL_DIR-infracost.json
+      - run: echo "here someone ran me"
 repos:
   - id: /.*/
     workflow: myworkflow
-    post_workflow_hooks:
+    pre_workflow_hooks:
       - run: infracost output --path=/tmp/$BASE_REPO_OWNER-$BASE_REPO_NAME-$PULL_NUM-*-infracost.json --format=github-comment --out-file=/tmp/infracost-comment.md
