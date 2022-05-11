@@ -1,7 +1,5 @@
 version: 3
 projects:
 - dir: test-project
-  allow_custom_workflows: true
-  allowed_overrides: [workflow]
   autoplan:
     when_modified: ["../modules/**/*.tf", "*.tf*"]
