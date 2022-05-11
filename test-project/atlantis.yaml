@@ -1,5 +1,0 @@
-version: 3
-projects:
-- name: testing-atlantis-now-nik
-  dir: .
-  workflow: myworkflow
