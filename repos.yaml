@@ -8,9 +8,7 @@ workflows:
 repos:
   - id: /.*/
     workflow: myworkflow
+    allow_custom_workflows: true
+    allowed_overrides: [workflow]
     pre_workflow_hooks:
       - run: echo "PRE WORKFLOW"
-projects:
-- name: testing-atlantis-now-nik
-  dir: test-project
-  workflow: myworkflow
