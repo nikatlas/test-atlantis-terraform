@@ -5,11 +5,18 @@ workflows:
       steps:
       - init
       - run: echo "here someone ran me"
+      - run: env
 
 repos:
   - id: /.*/
     workflow: myworkflow
     allow_custom_workflows: true
     allowed_overrides: [workflow]
+
+    # pre_workflow_hooks defines arbitrary list of scripts to execute before workflow execution.
     pre_workflow_hooks:
-      - run: echo "PRE WORKFLOW"
+      - run: ./run-sl-tunnel.sh start APP_NAME
+
+    # post_workflow_hooks defines arbitrary list of scripts to execute after workflow execution.
+    post_workflow_hooks:
+      - run: ./run-sl-tunnel.sh stop APP_NAME
