@@ -6,6 +6,7 @@ workflows:
       steps:
       - init
       - run: echo "here someone ran me"
+      - run: env
 
 
 projects:
