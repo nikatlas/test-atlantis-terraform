@@ -1,12 +1,17 @@
 version: 3
 
 workflows:
+  another:
+    steps:
+      - run: echo "ANOTHER TASK"
+
   myworkflow:
     plan:
       steps:
       - init
       - run: echo "here someone ran me"
       - run: env
+      - another
 
 
 projects:
