@@ -4,8 +4,11 @@ workflows:
   myworkflow:
     plan:
       steps:
+      - env:
+        name: ENV_NAME
+        command: "PROJECT=${PROJECT_NAME:-$(pwd)}; echo ${PROJECT##*/}"
       - init
-      - run: echo "here someone ran me"
+      - run: echo "here someone ran me $ENV_NAME"
       - run: ./scripts/another.sh start opkd
       - plan
       - run: ./scripts/another.sh stop
