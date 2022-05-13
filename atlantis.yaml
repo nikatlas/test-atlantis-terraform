@@ -16,5 +16,5 @@ workflows:
 
 projects:
 - name: testing-atlantis-now-nik
-  dir: .
+  dir: test-project/olx-pk/development
   workflow: myworkflow
