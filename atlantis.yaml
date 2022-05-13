@@ -16,5 +16,5 @@ workflows:
 
 projects:
 - name: testing-atlantis-now-nik
-  dir: /.*/
+  dir: .
   workflow: myworkflow
