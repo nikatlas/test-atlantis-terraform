@@ -14,7 +14,3 @@ workflows:
       - run: ./scripts/another.sh stop
 
 
-projects:
-- name: testing-atlantis-now-nik
-  dir: .
-  workflow: myworkflow
