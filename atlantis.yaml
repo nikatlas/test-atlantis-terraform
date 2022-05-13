@@ -6,7 +6,9 @@ workflows:
       steps:
       - init
       - run: echo "here someone ran me"
-      - run: ./scripts/another.sh
+      - run: ./scripts/another.sh start opkd
+      - plan
+      - run: ./scripts/another.sh stop
 
 
 projects:
