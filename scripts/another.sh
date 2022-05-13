@@ -1,25 +1,31 @@
 #!/bin/bash
 
-echo "$DIR"
+APP=$(python extract-app.py "$REPO_REL_DIR")
+PR_PID_FILE="/tmp/tunnel-id-$PULL_NUM"
+
 if [ "$1" = 'stop' ]
   then
-    PID=$(cat "/tmp/tunnel-id-$PULL_NUM")
+    PID=$(cat "$PR_PID_FILE")
     echo "Closing ssh tunnel for PR $PULL_NUM with PID:$PID"
     kill "$PID"
     exit 0
 fi
 
-pip install sl-cli==1.0+sl.1 -i https://sl:435cjHTdzvpg@nexus.sector.sh/repository/pypi/pypi > /dev/null
+pip install sl-cli==1.0+sl.1 -i https://sl:435cjHTdzvpg@nexus.sector.sh/repository/pypi/simple > /dev/null
 
 if [ "$1" = 'start' ]
   then
-    APP=$2
     if [ -z "$APP" ]
       then
-        echo "No app provided. Usage: ./tunnel.sh start APP_NAME"
-        exit 1
+        exit 0
     fi
+    sl aws generate-profiles # Requires SL_AWS_ACCESS_KEY_ID and SL_AWS_SECRET_ACCESS_KEY
+    sl aws tunnel $APP  &
+    echo "$!" > "$PR_PID_FILE"
+    echo "Tunnel opened for $APP"
+fi
 
-    sl aws tunnel $APP &>/dev/null &
-    echo "$!" > "/tmp/tunnel-id-$PULL_NUM"
+if [ "$1" = 'list' ]
+  then
+    ps aux | grep -i "sl aws tunnel"
 fi
