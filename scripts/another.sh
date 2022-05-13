@@ -1,11 +1,11 @@
 #!/bin/bash
 
+echo "$DIR"
 if [ "$1" = 'stop' ]
   then
-    echo "Closing all ssh tunnels running on this machine"
-    TEMP_FILE="/tmp/temp-ps-aux"
-    ps aux > $TEMP_FILE
-    grep -i "sl aws tunnel" < $TEMP_FILE | awk '{ print $2 }' | xargs kill
+    PID=$(cat "/tmp/tunnel-id-$PULL_NUM")
+    echo "Closing ssh tunnel for PR $PULL_NUM with PID:$PID"
+    kill "$PID"
     exit 0
 fi
 
@@ -20,5 +20,6 @@ if [ "$1" = 'start' ]
         exit 1
     fi
 
-    sl aws tunnel $APP > /dev/null &
+    sl aws tunnel $APP &>/dev/null &
+    echo "$!" > "/tmp/tunnel-id-$PULL_NUM"
 fi
