@@ -4,6 +4,11 @@ APP=$(python "${0%/*}/extract-app.py" "$REPO_REL_DIR")
 echo "App extracted from $REPO_REL_DIR: $APP"
 PR_PID_FILE="/tmp/tunnel-id-$PULL_NUM"
 
+if [ -z "$APP" ]
+  then
+    exit 0
+fi
+
 if [ "$1" = 'stop' ]
   then
     PID=$(cat "$PR_PID_FILE")
