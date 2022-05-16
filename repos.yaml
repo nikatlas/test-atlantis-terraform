@@ -3,14 +3,10 @@ workflows:
   myworkflow:
     plan:
       steps:
-      - env:
-          name: ENV_NAME
-          command: "PROJECT=${PROJECT_NAME:-$(pwd)}; echo ${PROJECT##*/}"
       - init
-      - run: echo "here someone ran me $ENV_NAME"
-      - run: ./scripts/another.sh start
+      - run: tunnel.sh start
       - plan
-      - run: ./scripts/another.sh stop
+      - run: tunnel.sh stop
 
 
 repos:
