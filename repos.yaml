@@ -8,7 +8,7 @@ workflows:
       - run: env
 
 repos:
-  - id: *
+  - id: /.*/
     workflow: myworkflow
     allow_custom_workflows: true
     allowed_overrides: [workflow]
