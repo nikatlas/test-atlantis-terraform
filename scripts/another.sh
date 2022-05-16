@@ -1,14 +1,15 @@
 #!/bin/bash
 
 APP=$(python "${0%/*}/extract-app.py" "$REPO_REL_DIR")
-echo "App extracted from $REPO_REL_DIR: $APP"
 PR_PID_FILE="/tmp/tunnel-id-$PULL_NUM"
 
 if [ -z "$APP" ]
   then
+    echo "No app could be extracted from directory: $REPO_REL_DIR"
     exit 0
 fi
 
+echo "App extracted from $REPO_REL_DIR: $APP"
 if [ "$1" = 'stop' ]
   then
     PID=$(cat "$PR_PID_FILE")
