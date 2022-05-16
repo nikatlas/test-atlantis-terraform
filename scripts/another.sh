@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP=$(python extract-app.py "$REPO_REL_DIR")
+APP=$(python "${0%/*}/extract-app.py" "$REPO_REL_DIR")
 PR_PID_FILE="/tmp/tunnel-id-$PULL_NUM"
 
 if [ "$1" = 'stop' ]
