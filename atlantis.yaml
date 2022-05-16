@@ -9,12 +9,12 @@ workflows:
           command: "PROJECT=${PROJECT_NAME:-$(pwd)}; echo ${PROJECT##*/}"
       - init
       - run: echo "here someone ran me $ENV_NAME"
-      - run: ../../../scripts/another.sh start
+      - run: ./scripts/another.sh start
       - plan
-      - run: ../../../scripts/another.sh stop
+      - run: ./scripts/another.sh stop
 
 
 projects:
-- name: *
-  dir: test-project/olx-pk/development
+- name: test-project-1
+  dir: .
   workflow: myworkflow
