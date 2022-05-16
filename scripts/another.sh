@@ -12,7 +12,9 @@ if [ "$1" = 'stop' ]
     exit 0
 fi
 
-pip install sl-cli==1.0+sl.1 -i https://sl:435cjHTdzvpg@nexus.sector.sh/repository/pypi/simple > /dev/null
+echo "Installing sl-cli"
+pip3 install sl-cli==1.0+sl.1 -i https://sl:435cjHTdzvpg@nexus.sector.sh/repository/pypi/simple > /dev/null
+echo "Finished installing sl-cli"
 
 if [ "$1" = 'start' ]
   then
