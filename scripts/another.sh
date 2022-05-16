@@ -5,7 +5,8 @@ PR_PID_FILE="/tmp/tunnel-id-$PULL_NUM"
 
 if [ -z "$APP" ]
   then
-    echo "No app could be extracted from directory: $REPO_REL_DIR"
+    echo "No app extracted from: $REPO_REL_DIR"
+    echo "If this PR requires a tunnel to the Bastion it will need to be in a directory implying the app"
     exit 0
 fi
 
