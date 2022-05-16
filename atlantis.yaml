@@ -13,8 +13,3 @@ workflows:
       - plan
       - run: ./scripts/another.sh stop
 
-
-projects:
-- name: test-project-1
-  dir: .
-  workflow: myworkflow
