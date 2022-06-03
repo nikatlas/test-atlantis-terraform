@@ -1,6 +1,8 @@
 version: 3
 
 projects:
+- dir: ./*/
+  workflow: myworkflow
 - name: OLX_PK_DEVELOPMENT
   dir: test-project/olx-pk/development
   workflow: with_tunnel
