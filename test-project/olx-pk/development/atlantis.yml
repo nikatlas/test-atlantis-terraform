@@ -1,0 +1,6 @@
+version: 3
+
+projects:
+- name: OLX_PK_DEVELOPMENT
+  dir: .
+  workspace: with_tunnel
